@@ -3,7 +3,7 @@
 import { createHash } from "node:crypto";
 import { headers } from "next/headers";
 import { Resend } from "resend";
-import { contactSchema, topics, type ContactFields, type ContactState } from "@/lib/contact-schema";
+import { cleanContact, topics, validateContact, type ContactFields, type ContactState } from "@/lib/contact-schema";
 import { rateLimit } from "@/lib/rate-limit";
 import { site } from "@/lib/site";
 
@@ -32,15 +32,11 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
     return { status: "success" };
   }
 
-  const parsed = contactSchema.safeParse(raw);
-  if (!parsed.success) {
-    const fieldErrors: Partial<Record<keyof ContactFields, string>> = {};
-    for (const issue of parsed.error.issues) {
-      const key = issue.path[0] as keyof ContactFields;
-      fieldErrors[key] ??= issue.message;
-    }
+  const fieldErrors = validateContact(raw);
+  if (Object.keys(fieldErrors).length > 0) {
     return { status: "error", message: "Please check the highlighted fields.", fieldErrors, values: raw };
   }
+  const parsed = cleanContact(raw);
 
   // Only sends count toward the limit, so a few typos never lock anyone out.
   const h = await headers();
@@ -65,7 +61,7 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
     };
   }
 
-  const { firstName, lastName, email, topic, message } = parsed.data;
+  const { firstName, lastName, email, topic, message } = parsed;
   const name = `${firstName} ${lastName}`;
   const topicLabel = topics[topic];
 

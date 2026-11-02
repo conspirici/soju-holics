@@ -20,6 +20,35 @@
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
+  --animate-rise: rise 560ms var(--ease-out-soft) both;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  --animate-shake: shake 440ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  @keyframes shake {
+    10%,
+    90% {
+      translate: -1px 0;
+    }
+    20%,
+    80% {
+      translate: 3px 0;
+    }
+    30%,
+    50%,
+    70% {
+      translate: -5px 0;
+    }
+    40%,
+    60% {
+      translate: 5px 0;
+    }
+  }
+
   --animate-marquee: marquee 38s linear infinite;
   @keyframes marquee {
     to {
@@ -170,6 +199,63 @@
   }
   .field[aria-invalid="true"] {
     border-color: var(--color-berry);
+    background: #fffafa;
+  }
+  .field[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-berry) 14%, transparent);
+  }
+  .field[data-valid="true"]:not(:focus) {
+    border-color: color-mix(in srgb, var(--color-bottle) 45%, var(--color-line));
+  }
+
+  /* Field messages open and close smoothly instead of popping the layout. */
+  .field-msg {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      grid-template-rows 260ms var(--ease-out-soft),
+      opacity 200ms ease,
+      transform 260ms var(--ease-out-soft);
+  }
+  .field-msg[data-show="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transform: none;
+  }
+  .field-msg > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Little tick that pops in once a field is good. */
+  .field-tick {
+    opacity: 0;
+    transform: scale(0.6);
+    transition:
+      opacity 180ms ease,
+      transform 260ms var(--ease-out-soft);
+  }
+  .field-tick[data-show="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Hand-drawn check on the thank-you panel. */
+  .draw-check circle,
+  .draw-check path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 700ms var(--ease-out-soft) forwards;
+  }
+  .draw-check path {
+    animation-delay: 380ms;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   /* Slow, slight zoom on photos; the .photo-frame wrapper clips the overflow. */
