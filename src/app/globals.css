@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fff8f2;
+  --color-blush: #fcebe3;
+  --color-blush-line: #f2d8cb;
+  --color-ink: #1d1a17;
+  --color-ink-soft: #2e2924;
+  --color-muted: #5e5650;
+  --color-line: #ecdfd4;
+  /* Soju-bottle green for actions, berry for small accents. */
+  --color-bottle: #1e6b47;
+  --color-bottle-hover: #185a3b;
+  --color-forest: #15402c;
+  --color-berry: #b93a58;
+
+  --font-sans: var(--ff-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--ff-display), ui-sans-serif, system-ui, sans-serif;
+  --font-hangul: var(--ff-hangul), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-bottle);
+    color: #fff;
+  }
+
+  /* Tailwind's reset gives buttons the default arrow; anything clickable gets the hand. */
+  a[href],
+  button:not(:disabled),
+  [role="button"],
+  summary,
+  select,
+  label[for],
+  input[type="submit"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-berry);
+    outline-offset: 3px;
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Display type: Archivo pushed a little wide, like the bottle labels. */
+@utility type-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+@utility type-display-tight {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 100%;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-stretch: 110%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-stretch: 105%;
+    letter-spacing: 0.01em;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .btn-primary {
+    background: var(--color-bottle);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-bottle-hover);
+  }
+
+  .btn-outline {
+    border: 1px solid currentColor;
+  }
+  .btn-outline:hover {
+    background: color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.75rem 0.95rem;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-size: 1rem;
+    transition: border-color 140ms ease;
+  }
+  .field::placeholder {
+    color: #9a918a;
+  }
+  .field:hover {
+    border-color: #cfc5b8;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-bottle);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-bottle) 15%, transparent);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-berry);
+  }
+
+  /* Slow, slight zoom on photos; the .photo-frame wrapper clips the overflow. */
+  .photo-zoom {
+    transition: transform 900ms var(--ease-out-soft);
+  }
+  @media (hover: hover) {
+    .photo-frame:hover .photo-zoom {
+      transform: scale(1.04);
+    }
+  }
+
+  /* Faint paper grain over the hero scrim; hides the softness of the 1024px source. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Age gate: visible by default, hidden pre-paint once the visitor has confirmed. */
+html[data-age="ok"] .age-gate {
+  display: none;
+}
+html:not([data-age="ok"]) body {
+  overflow: hidden;
+}
