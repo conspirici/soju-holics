@@ -1,9 +1,9 @@
 import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
-import { Flavors } from "@/components/sections/flavors";
+import { Family } from "@/components/sections/family";
+import { Flavors, NewFlavors } from "@/components/sections/flavors";
 import { Hero } from "@/components/sections/hero";
-import { Serve } from "@/components/sections/serve";
-import { Trade } from "@/components/sections/trade";
+import { WhereToBuy } from "@/components/sections/where-to-buy";
 import { JsonLd, flavorsJsonLd } from "@/lib/json-ld";
 
 export default function Home() {
@@ -11,10 +11,11 @@ export default function Home() {
     <>
       <JsonLd data={flavorsJsonLd()} />
       <Hero />
+      <NewFlavors />
       <Flavors />
       <About />
-      <Serve />
-      <Trade />
+      <Family />
+      <WhereToBuy />
       <Contact />
     </>
   );

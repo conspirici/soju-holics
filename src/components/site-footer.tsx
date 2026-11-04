@@ -16,7 +16,7 @@ export function SiteFooter() {
             <span className="type-display text-2xl">Sojuholics</span>
           </div>
           <p className="mt-5 max-w-sm text-muted">
-            Korean soju in six flavors, for the long dinners, the late nights, and every round of 건배 in between.
+            Korean flavored soju for the long dinners, the late nights, and every round of 건배 in between. Now in Pineapple and Mango.
           </p>
           <a
             href={site.instagram.url}
@@ -31,11 +31,12 @@ export function SiteFooter() {
 
         <nav aria-label="Flavors" className="md:col-span-3">
           <h2 className="eyebrow text-muted">Flavors</h2>
-          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 md:grid-cols-1">
+          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5">
             {flavors.map((f) => (
               <li key={f.slug}>
-                <Link href={`/#${f.slug}`} className="hover:text-berry">
+                <Link href={`/#${f.slug}`} className="inline-flex items-center gap-2 hover:text-berry">
                   {f.name}
+                  {f.isNew && <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-berry">New</span>}
                 </Link>
               </li>
             ))}

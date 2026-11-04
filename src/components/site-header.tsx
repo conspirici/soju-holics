@@ -25,7 +25,7 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-9 text-[0.9375rem] text-muted">
+          <ul className="flex items-center gap-6 text-[0.9375rem] text-muted xl:gap-8">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="transition-colors hover:text-bottle">
@@ -46,7 +46,7 @@ export function SiteHeader() {
           >
             <InstagramIcon />
           </a>
-          <Link href="/#contact" className="btn btn-primary hidden min-h-11 px-5 text-sm sm:inline-flex">
+          <Link href="/#contact" className="btn btn-primary hidden min-h-11 px-5 text-sm sm:inline-flex lg:hidden xl:inline-flex">
             Get in touch
           </Link>
           <button

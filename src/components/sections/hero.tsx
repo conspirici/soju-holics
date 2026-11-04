@@ -18,7 +18,15 @@ export function Hero() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 pb-12 pt-28 [text-shadow:0_1px_24px_rgba(0,0,0,0.25)] sm:px-8 sm:pb-16 lg:px-12 lg:pb-20">
-        <p className="eyebrow flex items-center gap-3 text-white">
+        <Link
+          href="/#new"
+          className="group inline-flex items-center gap-3 rounded-full bg-white/95 py-1.5 pl-1.5 pr-4 text-sm font-medium text-ink shadow-[0_8px_30px_-10px_rgba(0,0,0,0.5)] [text-shadow:none] transition-colors hover:bg-white"
+        >
+          <span className="eyebrow rounded-full bg-[#e8a317] px-2.5 py-1 text-ink">New</span>
+          Pineapple &amp; Mango are here
+          <ArrowIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+        <p className="eyebrow mt-8 flex items-center gap-3 text-white">
           <span className="font-hangul text-base normal-case tracking-normal text-white">소주</span>
           Korean flavored soju
         </p>
@@ -29,12 +37,12 @@ export function Hero() {
           Experience the authentic taste of Soju Holics.
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
-          <Link href="/#flavors" className="btn bg-white text-bottle hover:bg-paper">
-            Meet the six flavors
+          <Link href="/#new" className="btn bg-white text-bottle hover:bg-paper">
+            See the new flavors
             <ArrowIcon />
           </Link>
-          <Link href="/#contact" className="btn btn-outline text-white">
-            Stock Sojuholics
+          <Link href="/#where-to-buy" className="btn btn-outline text-white">
+            Where to buy
           </Link>
         </div>
       </div>

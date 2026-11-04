@@ -1,11 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import lifestyle from "@/assets/lifestyle-table.jpg";
 
 const facts = [
-  { value: "6", label: "Flavors" },
+  { value: "8", label: "Soju flavors" },
   { value: "375 ml", label: "Per bottle" },
   { value: "12–16%", label: "ABV" },
-  { value: "Korea", label: "Made in" },
+  { value: "20 years", label: "Importing Korean drinks" },
 ];
 
 export function About() {
@@ -41,10 +42,22 @@ export function About() {
             timeless elegance of classic recipes to exciting modern twists, each bottle is a celebration of Korean
             culture and craftsmanship.
           </p>
+          <p className="mt-5 max-w-lg leading-relaxed text-ink-soft">
+            Sojuholics was founded by Henry Kim after 20 years of importing Korean beverages to the U.S. The family
+            now includes{" "}
+            <Link href="/#wineholics" className="font-medium underline decoration-line underline-offset-4 hover:decoration-bottle">
+              Wineholics
+            </Link>{" "}
+            and{" "}
+            <Link href="/#makgeolliholics" className="font-medium underline decoration-line underline-offset-4 hover:decoration-bottle">
+              Makgeolliholics
+            </Link>
+            .
+          </p>
 
           <dl className="mt-14 grid grid-cols-2 gap-y-8 border-t border-line pt-8 sm:grid-cols-4">
             {facts.map((f) => (
-              <div key={f.value} className="pr-4">
+              <div key={f.label} className="pr-4">
                 <dt className="sr-only">{f.label}</dt>
                 <dd>
                   <span className="type-display-tight block text-3xl">{f.value}</span>

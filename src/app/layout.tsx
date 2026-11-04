@@ -33,7 +33,7 @@ const hangul = Black_Han_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Sojuholics | Korean Flavored Soju: Original, Strawberry, Peach & More",
+    default: "Sojuholics | Korean Flavored Soju: New Pineapple & Mango, Original & More",
     template: "%s | Sojuholics",
   },
   description: site.description,

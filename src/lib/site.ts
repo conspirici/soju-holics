@@ -4,7 +4,7 @@ export const site = {
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.soju-holics.com").replace(/\/$/, ""),
   tagline: "Sip the flavor, savor the moment.",
   description:
-    "Sojuholics makes smooth Korean soju in six flavors: Original, Strawberry, Green Grape, Peach, Lychee and Yogurt. 375 ml bottles, 12–16% ABV, imported from Korea.",
+    "Sojuholics makes smooth Korean flavored soju, now including new Pineapple and Mango alongside Original, Lychee, Yogurt, Peach, Green Grape and Strawberry. 375 ml bottles, 12–16% ABV.",
   email: "info@soju-holics.com",
   instagram: {
     handle: "@sojuholics1",
@@ -19,8 +19,10 @@ export const site = {
 } as const;
 
 export const nav = [
+  { href: "/#new", label: "New flavors" },
   { href: "/#flavors", label: "Flavors" },
   { href: "/#about", label: "Our story" },
-  { href: "/#serve", label: "How to pour" },
+  { href: "/#family", label: "Wineholics" },
+  { href: "/#where-to-buy", label: "Where to buy" },
   { href: "/#contact", label: "Contact" },
 ] as const;

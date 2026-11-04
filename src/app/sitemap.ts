@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: site.url,
       changeFrequency: "monthly",
       priority: 1,
-      images: [`${site.url}/opengraph-image.jpg`, ...flavors.map((f) => `${site.url}${f.image.src}`)],
+      images: [`${site.url}/opengraph-image.jpg`, ...flavors.flatMap((f) => (f.image ? [`${site.url}${f.image.src}`] : []))],
       videos: [
         {
           title: "Sojuholics flavors",

@@ -57,7 +57,7 @@ export function flavorsJsonLd(): Thing {
         name: `Sojuholics ${f.name}`,
         alternateName: `${f.korean} 소주`,
         description: `${f.lead} ${f.body}`,
-        image: `${site.url}${f.image.src}`,
+        ...(f.image && { image: `${site.url}${f.image.src}` }),
         url: `${site.url}/#${f.slug}`,
         category: "Flavored soju",
         brand: { "@type": "Brand", name: site.name },
