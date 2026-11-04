@@ -5,9 +5,9 @@ import { site } from "@/lib/site";
 export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="bg-paper">
-      <div className="mx-auto grid max-w-[90rem] gap-14 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-12 lg:gap-16 lg:px-12">
+      <div className="mx-auto grid max-w-[90rem] gap-16 px-5 py-24 sm:px-8 md:py-36 lg:grid-cols-12 lg:gap-24 lg:px-12">
         <div className="lg:col-span-5">
-          <p className="eyebrow text-berry">Contact us</p>
+          <p className="eyebrow text-muted">Contact us</p>
           <h2 id="contact-title" className="type-display-tight mt-5 text-[clamp(2.1rem,4.4vw,3.6rem)]">
             Say hello.
           </h2>

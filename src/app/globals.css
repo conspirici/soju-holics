@@ -48,13 +48,6 @@
       translate: 5px 0;
     }
   }
-
-  --animate-marquee: marquee 38s linear infinite;
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
-  }
 }
 
 @layer base {
@@ -140,6 +133,13 @@
   font-stretch: 110%;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer components {

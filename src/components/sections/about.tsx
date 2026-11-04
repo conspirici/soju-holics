@@ -2,16 +2,16 @@ import Image from "next/image";
 import lifestyle from "@/assets/lifestyle-table.jpg";
 
 const facts = [
-  { value: "6", label: "Flavors, from Original to Yogurt" },
-  { value: "375 ml", label: "Every bottle, made to share" },
-  { value: "12–16%", label: "ABV, smooth not harsh" },
-  { value: "Korea", label: "Where every bottle comes from" },
+  { value: "6", label: "Flavors" },
+  { value: "375 ml", label: "Per bottle" },
+  { value: "12–16%", label: "ABV" },
+  { value: "Korea", label: "Made in" },
 ];
 
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-title" className="bg-paper">
-      <div className="mx-auto grid max-w-[90rem] items-center gap-12 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-12 lg:gap-16 lg:px-12">
+    <section id="about" aria-labelledby="about-title" className="border-t border-line bg-white">
+      <div className="mx-auto grid max-w-[90rem] items-center gap-14 px-5 py-24 sm:px-8 md:py-36 lg:grid-cols-12 lg:gap-24 lg:px-12">
         <figure className="lg:col-span-6">
           <div className="photo-frame overflow-hidden">
             <Image
@@ -32,23 +32,23 @@ export function About() {
         </figure>
 
         <div className="lg:col-span-6">
-          <p className="eyebrow text-berry">About Soju Holics</p>
+          <p className="eyebrow text-muted">About Soju Holics</p>
           <h2 id="about-title" className="type-display-tight mt-5 text-[clamp(2.1rem,4.4vw,3.6rem)]">
             Welcome to Sojuholics, where tradition meets innovation in every sip.
           </h2>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft">
+          <p className="mt-8 max-w-lg text-lg leading-relaxed text-ink-soft">
             Discover the bold and vibrant flavors of Korea with our handcrafted range of flavored soju. From the
             timeless elegance of classic recipes to exciting modern twists, each bottle is a celebration of Korean
             culture and craftsmanship.
           </p>
 
-          <dl className="mt-12 grid grid-cols-2 border-t border-line sm:grid-cols-4">
+          <dl className="mt-14 grid grid-cols-2 gap-y-8 border-t border-line pt-8 sm:grid-cols-4">
             {facts.map((f) => (
-              <div key={f.value} className="border-b border-line py-5 pr-4 sm:border-b-0">
+              <div key={f.value} className="pr-4">
                 <dt className="sr-only">{f.label}</dt>
                 <dd>
-                  <span className="type-display-tight block text-2xl">{f.value}</span>
-                  <span className="mt-1 block text-sm leading-snug text-muted">{f.label}</span>
+                  <span className="type-display-tight block text-3xl">{f.value}</span>
+                  <span className="mt-2 block text-sm text-muted">{f.label}</span>
                 </dd>
               </div>
             ))}

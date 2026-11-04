@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 export function Trade() {
   return (
     <section id="where-to-find" aria-labelledby="trade-title" className="bg-forest text-paper">
-      <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-16 sm:px-8 md:py-20 lg:grid-cols-12 lg:items-end lg:px-12">
+      <div className="mx-auto grid max-w-[90rem] gap-12 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-12 lg:items-end lg:px-12">
         <div className="lg:col-span-7">
           <p className="eyebrow text-paper/60">Restaurants, bars & retailers</p>
           <h2 id="trade-title" className="type-display-tight mt-5 text-[clamp(2rem,4vw,3.25rem)]">

@@ -5,31 +5,25 @@ import { flavors, type Flavor } from "@/lib/flavors";
 export function Flavors() {
   return (
     <section id="flavors" aria-labelledby="flavors-title">
-      <div className="border-y border-line bg-white">
-        <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-16 sm:px-8 md:py-20 lg:grid-cols-12 lg:px-12">
-          <div className="lg:col-span-6">
-            <p className="eyebrow text-berry">The lineup</p>
+      <div className="bg-paper">
+        <div className="mx-auto max-w-[90rem] px-5 pb-20 pt-20 sm:px-8 md:pb-28 md:pt-28 lg:px-12">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow text-muted">The lineup</p>
             <h2 id="flavors-title" className="type-display-tight mt-5 text-[clamp(2.1rem,4.4vw,3.6rem)]">
               Six bottles. One for every kind of night.
             </h2>
           </div>
-          <div className="flex flex-col justify-end gap-8 lg:col-span-5 lg:col-start-8">
-            <nav aria-label="Jump to a flavor">
-              <ul className="flex flex-wrap gap-2">
-                {flavors.map((f) => (
-                  <li key={f.slug}>
-                    <Link
-                      href={`/#${f.slug}`}
-                      className="flex items-center gap-2 border border-line px-3 py-2 text-sm transition-colors hover:border-bottle"
-                    >
-                      <span className="size-2" style={{ background: f.theme.accent }} aria-hidden="true" />
-                      {f.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+
+          <nav aria-label="Jump to a flavor" className="mt-14 md:mt-20">
+            {/* One swipeable row below xl (bleeds to the screen edges, next card peeks in); a 6-up grid on wide screens. */}
+            <ul className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto overscroll-x-contain px-5 pt-2 sm:-mx-8 sm:scroll-px-8 sm:gap-6 sm:px-8 lg:-mx-12 lg:scroll-px-12 lg:px-12 xl:mx-0 xl:grid xl:grid-cols-6 xl:overflow-visible xl:px-0">
+              {flavors.map((f) => (
+                <li key={f.slug} className="w-[44%] shrink-0 snap-start sm:w-[30%] md:w-[23%] xl:w-auto">
+                  <FlavorCard flavor={f} />
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
 
@@ -40,73 +34,86 @@ export function Flavors() {
   );
 }
 
+function FlavorCard({ flavor: f }: { flavor: Flavor }) {
+  return (
+    <Link
+      href={`/#${f.slug}`}
+      className="group block transition-transform duration-500 ease-out-soft hover:-translate-y-1.5"
+    >
+      <div className="photo-frame overflow-hidden" style={{ background: f.theme.tint }}>
+        <Image
+          src={f.image}
+          alt=""
+          sizes="(min-width: 1280px) 15vw, (min-width: 768px) 30vw, 46vw"
+          quality={80}
+          placeholder="blur"
+          className="photo-zoom aspect-[4/5] w-full object-cover"
+        />
+      </div>
+      <div className="mt-4 flex items-baseline justify-between gap-3">
+        <span className="type-display text-lg uppercase tracking-[0.01em] sm:text-xl" style={{ color: f.theme.accent }}>
+          {f.name}
+        </span>
+        <span lang="ko" className="font-hangul text-sm text-muted">
+          {f.korean}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 function FlavorBand({ flavor: f, index }: { flavor: Flavor; index: number }) {
   const imageFirst = index % 2 === 1;
-  const number = String(index + 1).padStart(2, "0");
 
   return (
     <article
       id={f.slug}
       aria-labelledby={`${f.slug}-title`}
-      className="border-b"
-      style={{ background: f.theme.tint, borderColor: f.theme.line }}
+      className={index % 2 === 0 ? "border-t border-line bg-white" : "border-t border-line bg-paper"}
     >
-      <div className="mx-auto grid max-w-[90rem] items-center gap-10 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-2 lg:gap-20 lg:px-12">
+      <div className="mx-auto grid max-w-[90rem] items-center gap-12 px-5 py-20 sm:px-8 md:py-32 lg:grid-cols-2 lg:gap-24 lg:px-12">
         <div className={imageFirst ? "lg:order-2" : "lg:order-1"}>
-          <div className="flex items-start justify-between gap-4 sm:gap-6">
+          <div className="flex items-start justify-between gap-6">
             <div className="min-w-0">
-              <p className="eyebrow" style={{ color: f.theme.accent }}>
-                {number} / 06 · {f.note}
-              </p>
+              <p className="eyebrow text-muted">{f.note}</p>
               <h3
                 id={`${f.slug}-title`}
-                className="type-display mt-5 text-[clamp(1.9rem,8.2vw,3.5rem)] uppercase lg:text-[clamp(2.5rem,4.3vw,4rem)]"
+                className="type-display mt-5 text-[clamp(2.4rem,9vw,3.75rem)] uppercase lg:text-[clamp(2.75rem,4.6vw,4.5rem)]"
                 style={{ color: f.theme.accent }}
               >
-                <span className="block text-[0.42em] tracking-[0.02em] text-ink">Sojuholics</span>
                 {f.name}
               </h3>
             </div>
             <p
               lang="ko"
-              className="font-hangul shrink-0 text-[clamp(1.9rem,4.5vw,3.75rem)] leading-none [writing-mode:vertical-rl]"
-              style={{ color: f.theme.accent, opacity: 0.9 }}
+              aria-hidden="true"
+              className="font-hangul shrink-0 text-[clamp(1.6rem,3.6vw,3rem)] leading-none opacity-25 [writing-mode:vertical-rl]"
+              style={{ color: f.theme.accent }}
             >
               {f.korean}
             </p>
           </div>
 
-          <p className="mt-8 max-w-xl text-xl leading-relaxed text-ink">{f.summary}</p>
+          <p className="mt-8 max-w-md text-lg leading-relaxed text-ink-soft sm:text-xl">{f.summary}</p>
 
-          <details className="group mt-4 max-w-xl">
-            <summary
-              className="inline-flex cursor-pointer list-none items-center gap-2 text-sm font-medium underline decoration-1 underline-offset-4 [&::-webkit-details-marker]:hidden"
-              style={{ color: f.theme.accent }}
-            >
+          <ul className="mt-8 flex flex-wrap gap-2 text-sm">
+            <li className="rounded-full border border-line px-3.5 py-1.5">
+              {f.volumeMl} ml · {f.abv}% ABV
+            </li>
+            <li className="rounded-full border border-line px-3.5 py-1.5">
+              <span className="text-muted">{f.pairing.label}:</span> {f.pairing.value}
+            </li>
+          </ul>
+
+          <details className="group mt-8 max-w-md">
+            <summary className="inline-flex list-none items-center gap-2 text-sm font-medium text-muted underline decoration-1 underline-offset-4 transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
               <span className="group-open:hidden">Read more</span>
               <span className="hidden group-open:inline">Show less</span>
             </summary>
             <p className="mt-4 leading-relaxed text-ink-soft">
-              <strong className="font-semibold text-ink">{f.lead}</strong> {f.body}
+              {f.lead} {f.body}
             </p>
           </details>
-
-          <dl className="mt-8 max-w-xl text-[0.9375rem]">
-            {[
-              { label: "Volume", value: `${f.volumeMl} ml` },
-              { label: "ABV", value: `${f.abv}%` },
-              f.pairing,
-            ].map((row) => (
-              <div
-                key={row.label}
-                className="flex items-baseline justify-between gap-6 border-t py-3"
-                style={{ borderColor: f.theme.line }}
-              >
-                <dt className="text-muted">{row.label}</dt>
-                <dd className="text-right font-medium">{row.value}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <div className={`photo-frame order-first overflow-hidden ${imageFirst ? "lg:order-1" : "lg:order-2"}`}>

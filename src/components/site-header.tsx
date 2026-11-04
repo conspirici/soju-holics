@@ -17,7 +17,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-blush-line bg-blush/92 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
       <div className="mx-auto flex h-[4.5rem] max-w-[90rem] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
         <Link href="/" className="flex items-center gap-3" aria-label={`${site.name}, home`}>
           <Logo size={40} className="size-10" />
@@ -73,11 +73,11 @@ export function SiteHeader() {
         id="mobile-nav"
         aria-label="Main"
         hidden={!open}
-        className="border-t border-blush-line bg-blush px-5 pb-8 pt-2 sm:px-8 lg:hidden"
+        className="border-t border-line bg-paper px-5 pb-8 pt-2 sm:px-8 lg:hidden"
       >
         <ul>
           {nav.map((item) => (
-            <li key={item.href} className="border-b border-blush-line">
+            <li key={item.href} className="border-b border-line">
               <Link
                 href={item.href}
                 onClick={() => setOpen(false)}
